@@ -18,12 +18,12 @@ namespace CorotlfocsLibrary
         public int Add(int a, int b)
         {
 
-            TcpClientExample.testxx();
+            TcpReadinfo.testxx();
             return a + b;
         }
     }
 
-    class TcpClientExample
+    class TcpReadinfo
     {
         private static string serverIp = "127.0.0.1"; // 服务器 IP 地址
     private static int port = 5000; // 服务器端口
