@@ -25,8 +25,8 @@ namespace CorotlfocsLibrary
 
     public class TcpReadinfo
     {
-    private static string serverIp = "127.0.0.1"; // 服务器 IP 地址
-    private static int port = 5000; // 服务器端口
+    private static string serverIp = "192.168.3.7"; // 服务器 IP 地址
+    private static int port = 8887; // 服务器端口
     static void setipform(string setserverIp,int setport)
     {
         serverIp=setserverIp;
@@ -48,7 +48,7 @@ namespace CorotlfocsLibrary
                 Console.WriteLine("发送数据: " + BitConverter.ToString(sendData));
                 
                 // 读取服务器响应，等待 1000ms
-                stream.ReadTimeout = 1000000;
+                stream.ReadTimeout = 1000;
                 try
                 {
                     int bytesRead = stream.Read(trspData, 0, trspData.Length);
@@ -96,10 +96,26 @@ namespace CorotlfocsLibrary
             byte[] trspData=sendData;
             return SendAndReceiveData(sendData, out trspData);
         }
-         // 光圈位置控制 取值范围0-------1500000
-        public static int  controlapertureRotation(int diskNumber)
+        // 聚焦位置控制 取值范围0-------150万  7.42  
+        // static int kfocus=150*10000/74.2;
+        //     static int kguang=150*10000/180;
+        static int kfocus= (int)(150*10000/74.2);
+        static int kguang=1;
+            
+        public static int  controlfocusRotation(int diskNumber)
         {
-             byte[] sendData = { 0x01, 0x01, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x04 };
+            //  if(diskNumber>170)
+            //  {
+            //     diskNumber=170;
+            //  }
+            //  if(diskNumber<0)
+            //  {
+            //     diskNumber=0;
+            //  }
+             
+             diskNumber=diskNumber*kfocus;
+               byte[] sendData = { 0x01, 0x01, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x04 };
+           
             
            // 将 diskNumber 作为 32 位整数存入 sendData，并按照大端序存储
             sendData[4] = (byte)((diskNumber >> 24) & 0xFF);
@@ -113,10 +129,23 @@ namespace CorotlfocsLibrary
             byte[] trspData=sendData;
             return SendAndReceiveData(sendData, out trspData);
         }
-        // 聚焦位置控制 取值范围0-------1500000
-        public static int  controlfocusRotation(int diskNumber)
+        //  光圈 150万  4m  22mm     0-18可以了..
+         // 光圈位置控制 取值范围0-------150万
+      
+        public static int controlapertureRotation (int diskNumber)
         {
+            // if(diskNumber>180)
+            //  {
+            //     diskNumber=180;
+            //  }
+            //  if(diskNumber<0)
+            //  {
+            //     diskNumber=0;
+            //  }
+            
+             diskNumber=diskNumber* kguang;
              byte[] sendData = { 0x01, 0x01, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x04 };
+             
             
            // 将 diskNumber 作为 32 位整数存入 sendData，并按照大端序存储
             sendData[4] = (byte)((diskNumber >> 24) & 0xFF);
@@ -135,8 +164,8 @@ namespace CorotlfocsLibrary
         // type
         //  1 上圆盘信息读取
         //  2 下圆盘信息
-        //  3 聚焦信息读取
-        //  4 光圈信息读取
+        //  3 光圈信息读取
+        //  4 聚焦信息读取
         //  order:   
         // 02  实时位置
         // 03  目标位置
@@ -163,6 +192,23 @@ namespace CorotlfocsLibrary
                 | ((trspData[6] & 0xFF) << 8) 
                 | (trspData[7] & 0xFF);
             Console.WriteLine("读取到数据: " + ans.ToString());
+            if(type==4)
+            {
+                if(order==2 || order==3)
+                {
+                   ans= (int)((ans+0.5*kfocus)/kfocus);
+                    
+                }
+            }
+            if(type==3)
+            {
+                if(order==2 || order==3)
+                {
+            
+                     
+                    ans = (int)((ans + 0.5 * kguang) / kguang);
+                }
+            }
             return 0;
         }
 
@@ -176,3 +222,7 @@ namespace CorotlfocsLibrary
         }
     }
 }
+
+
+// // 光圈 150万  4m  22mm     
+// foc 270万   焦距  17mm   
