@@ -69,8 +69,8 @@ namespace testapp
             new Tuple<string, string>("controlBottomDiskRotation", "控制下圆盘旋转到指定孔位"),
                new Tuple<string, string>("controlfocusRotation", "控制聚焦位置"),
             new Tuple<string, string>("controlapertureRotation", "控制光圈位置"),
-         
             new Tuple<string, string>("readInfo", "读取状态信息"),
+            new Tuple<string, string>("setkey", "设置控制读取的为编码器值"),
             // new Tuple<string, string>("readBottomDiskInfo", "读取下圆盘状态信息（参数同上圆盘）"),
             // new Tuple<string, string>("readfocusInfo", "读取聚焦机构状态信息（参数同上圆盘）"),
             // new Tuple<string, string>("readapertureInfo", "读取光圈机构状态信息（参数同上圆盘）"),
@@ -178,6 +178,11 @@ namespace testapp
             output2.Text= out2.ToString();
             output3.Text = out3.ToString();
                 return; 
+        }
+        if(button?.Name=="setkey")
+        {
+            TcpReadinfo.IsUsemm=0;
+              return; 
         }
 
 

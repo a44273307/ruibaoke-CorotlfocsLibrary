@@ -148,8 +148,8 @@ namespace CorotlfocsLibrary
         static int maxguangzhi=160*10000;
 
         static int maxguangSet=160*10000;
-        static int maxfocsSet=250*10000;
-        static int IsUsemm=1;
+        static int maxfocsSet=350*10000;
+        public static int IsUsemm=1;
         // 1600000
         private static void readini()
         {
@@ -184,9 +184,12 @@ namespace CorotlfocsLibrary
             {
                 logger($"readinit: nofile");
             }
+            logger($"ans:maxfocsSet {maxfocsSet}");
+            logger($"ans: maxguangSet{maxguangSet}");
         }
         public static int  controlfocusRotation(int diskNumber)
         {
+            
             //  if(diskNumber>170)
             //  {
             //     diskNumber=170;
@@ -203,6 +206,7 @@ namespace CorotlfocsLibrary
             {
                 diskNumber=maxfocsSet;
             }
+            logger($"controlfocusRotation: {diskNumber}");
            // 将 diskNumber 作为 32 位整数存入 sendData，并按照大端序存储
             sendData[4] = (byte)((diskNumber >> 24) & 0xFF);
             sendData[5] = (byte)((diskNumber >> 16) & 0xFF);
@@ -239,6 +243,7 @@ namespace CorotlfocsLibrary
             {
                 diskNumber=maxguangSet;
             }
+             logger($"controlapertureRotation: {diskNumber}");
              byte[] sendData = { 0x01, 0x01, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x04 };
              
             
