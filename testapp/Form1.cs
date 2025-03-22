@@ -62,38 +62,52 @@ namespace testapp
     }
     private void CreateControlButtons()
     {
-        // 按钮配置列表（按钮名称，显示文本）
-        var buttonConfigs = new List<Tuple<string, string>>() 
-        {
-            new Tuple<string, string>("controlTopDiskRotation", "控制上圆盘旋转到指定孔位"),
-            new Tuple<string, string>("controlBottomDiskRotation", "控制下圆盘旋转到指定孔位"),
-               new Tuple<string, string>("controlfocusRotation", "控制聚焦位置"),
-            new Tuple<string, string>("controlapertureRotation", "控制光圈位置"),
-            new Tuple<string, string>("readInfo", "读取状态信息"),
-            new Tuple<string, string>("setkey", "设置控制读取的为编码器值"),
-            // new Tuple<string, string>("readBottomDiskInfo", "读取下圆盘状态信息（参数同上圆盘）"),
-            // new Tuple<string, string>("readfocusInfo", "读取聚焦机构状态信息（参数同上圆盘）"),
-            // new Tuple<string, string>("readapertureInfo", "读取光圈机构状态信息（参数同上圆盘）"),
-         
-        };
+            // 按钮配置列表（按钮名称，显示文本）
+            var buttonConfigs = new List<Tuple<string, string>>()
+{
+    new Tuple<string, string>("controlTopDiskRotation", "控制上圆盘旋转到指定孔位"),
+    new Tuple<string, string>("controlBottomDiskRotation", "控制下圆盘旋转到指定孔位"),
+    new Tuple<string, string>("controlfocusRotation", "控制聚焦位置"),
+    new Tuple<string, string>("controlapertureRotation", "控制光圈位置"),
+    new Tuple<string, string>("readInfo", "读取状态信息"),
+    new Tuple<string, string>("setkey", "设置控制读取的为编码器值"),
+    // new Tuple<string, string>("readBottomDiskInfo", "读取下圆盘状态信息（参数同上圆盘）"),
+    // new Tuple<string, string>("readfocusInfo", "读取聚焦机构状态信息（参数同上圆盘）"),
+    // new Tuple<string, string>("readapertureInfo", "读取光圈机构状态信息（参数同上圆盘）"),
+    };
 
-        // 创建按钮并设置属性
-        int verticalPosition = 10;
-        foreach (var config in buttonConfigs)
+    // 创建按钮并设置属性
+    int verticalPosition = 10;
+    // 遍历除最后一个元素外的所有元素
+    for (int i = 0; i < buttonConfigs.Count - 1; i++)
+    {
+        var config = buttonConfigs[i];
+        var btn = new Button
         {
-            var btn = new Button
-            {
-                Name = config.Item1,
-                Text = config.Item2,
-                Location = new Point(20, verticalPosition),
-                Size = new Size(280, 40),
-                Font = new Font("Microsoft YaHei", 10F)
-            };
-            btn.Click += Button_ClickHandler;
-            
-            Controls.Add(btn);
-            verticalPosition += 50;
-        }
+            Name = config.Item1,
+            Text = config.Item2,
+            Location = new Point(20, verticalPosition),
+            Size = new Size(280, 40),
+            Font = new Font("Microsoft YaHei", 10F)
+        };
+        btn.Click += Button_ClickHandler;
+        
+        Controls.Add(btn);
+        verticalPosition += 50;
+    }
+
+    // 手动创建并设置最后一个按钮的位置
+    var lastConfig = buttonConfigs[buttonConfigs.Count - 1];
+    var lastBtn = new Button
+    {
+        Name = lastConfig.Item1,
+        Text = lastConfig.Item2,
+        Location = new Point(600, 500), // 手动设置位置
+        Size = new Size(280, 40),
+        Font = new Font("Microsoft YaHei", 10F)
+    };
+    lastBtn.Click += Button_ClickHandler;
+    Controls.Add(lastBtn);
     }
    
         private void Form1_Load(object sender, EventArgs e)
