@@ -23,11 +23,15 @@ namespace CorotlfocsLibrary
         }
     }
 
-    class TcpReadinfo
+    public class TcpReadinfo
     {
-        private static string serverIp = "127.0.0.1"; // 服务器 IP 地址
+    private static string serverIp = "127.0.0.1"; // 服务器 IP 地址
     private static int port = 5000; // 服务器端口
-
+    static void setipform(string setserverIp,int setport)
+    {
+        serverIp=setserverIp;
+        port=setport;
+    }
     static int SendAndReceiveData(byte[] sendData, out byte[] trspData)
     {
         trspData = new byte[sendData.Length];
@@ -160,7 +164,6 @@ namespace CorotlfocsLibrary
                 | (trspData[7] & 0xFF);
             Console.WriteLine("读取到数据: " + ans.ToString());
             return 0;
-            
         }
 
 
