@@ -9,7 +9,10 @@ using System;
 using System.Net.Sockets;
 using System.Text;
 
-
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace CorotlfocsLibrary
 {
@@ -38,38 +41,66 @@ namespace CorotlfocsLibrary
         
         try
         {
-            using (TcpClient client = new TcpClient(serverIp, port))
-            using (NetworkStream stream = client.GetStream())
-            {
-                Console.WriteLine("已连接到服务器");
-                
-                // 发送数据到服务器
-                stream.Write(sendData, 0, sendData.Length);
-                Console.WriteLine("发送数据: " + BitConverter.ToString(sendData));
-                
-                // 读取服务器响应，等待 1000ms
-                stream.ReadTimeout = 1000;
+                TcpClient client = null;
+                NetworkStream stream = null;
                 try
                 {
-                    int bytesRead = stream.Read(trspData, 0, trspData.Length);
-                    if (bytesRead == sendData.Length &&     trspData[8] == (byte)trspData.Take(8).Sum(b => (int)b))
+                    // 异步连接并设置超时
+                    client = new TcpClient();
+                    IAsyncResult result = client.BeginConnect(IPAddress.Parse(serverIp), port, null, null);
+                    bool success = result.AsyncWaitHandle.WaitOne(500, true);
+                    if (!success)
                     {
-                        Console.WriteLine("收到校验通过数据: " + BitConverter.ToString(trspData));
-                        return 0;
+                        Console.WriteLine("连接超时，未能在 500 毫秒内建立连接");
+                        return -3;
                     }
-                    else
+                    client.EndConnect(result);
+
+                    stream = client.GetStream();
+                    Console.WriteLine("已连接到服务器");
+
+                    // 发送数据到服务器
+                    stream.Write(sendData, 0, sendData.Length);
+                    Console.WriteLine("发送数据: " + BitConverter.ToString(sendData));
+
+                    // 读取服务器响应，等待 1000ms
+                    stream.ReadTimeout = 1000;
+                    try
                     {
-                        Console.WriteLine("收到校验不通过数据: " + BitConverter.ToString(trspData));
-                        return -1;
+                        int bytesRead = stream.Read(trspData, 0, trspData.Length);
+                        if (bytesRead == sendData.Length && trspData[8] == (byte)trspData.Take(8).Sum(b => (int)b))
+                        {
+                            Console.WriteLine("收到校验通过数据: " + BitConverter.ToString(trspData));
+                            return 0;
+                        }
+                        else
+                        {
+                            Console.WriteLine("收到校验不通过数据: " + BitConverter.ToString(trspData));
+                            return -1;
+                        }
                     }
+                    catch (SocketException se)
+                    {
+                        Console.WriteLine("1000ms 超时未收到数据");
+                        return -2;
+                    }
+                }
+                catch (SocketException se)
+                {
+                    Console.WriteLine($"连接服务器时发生 Socket 异常: {se.Message}");
+                    return -4;
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("1000ms 超时未收到数据");
-                    return -2;
+                    Console.WriteLine($"发生未知异常: {e.Message}");
+                    return -5;
+                }
+                finally
+                {
+                    stream?.Close();
+                    client?.Close();
                 }
             }
-        }
         catch (Exception e)
         {
             Console.WriteLine("错误: " + e.Message);
