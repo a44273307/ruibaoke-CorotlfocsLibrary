@@ -30,6 +30,11 @@ namespace CorotlfocsLibrary
     {
     private static string serverIp = "192.168.3.7"; // 服务器 IP 地址
     private static int port = 8887; // 服务器端口
+    // 定义一个委托类型，用于表示日志记录方法
+    public delegate void LoggerDelegate(string message);
+
+    // 定义一个静态字段，用于存储当前的日志记录方法
+    public static LoggerDelegate logger = Console.WriteLine;
     static void setipform(string setserverIp,int setport)
     {
         serverIp=setserverIp;
@@ -51,17 +56,17 @@ namespace CorotlfocsLibrary
                     bool success = result.AsyncWaitHandle.WaitOne(500, true);
                     if (!success)
                     {
-                        Console.WriteLine("连接超时，未能在 500 毫秒内建立连接");
+                        logger("连接超时，未能在 500 毫秒内建立连接");
                         return -3;
                     }
                     client.EndConnect(result);
 
                     stream = client.GetStream();
-                    Console.WriteLine("已连接到服务器");
+                    logger("已连接到服务器");
 
                     // 发送数据到服务器
                     stream.Write(sendData, 0, sendData.Length);
-                    Console.WriteLine("发送数据: " + BitConverter.ToString(sendData));
+                    logger("发送数据: " + BitConverter.ToString(sendData));
 
                     // 读取服务器响应，等待 1000ms
                     stream.ReadTimeout = 1000;
@@ -70,29 +75,29 @@ namespace CorotlfocsLibrary
                         int bytesRead = stream.Read(trspData, 0, trspData.Length);
                         if (bytesRead == sendData.Length && trspData[8] == (byte)trspData.Take(8).Sum(b => (int)b))
                         {
-                            Console.WriteLine("收到校验通过数据: " + BitConverter.ToString(trspData));
+                            logger("收到校验通过数据: " + BitConverter.ToString(trspData));
                             return 0;
                         }
                         else
                         {
-                            Console.WriteLine("收到校验不通过数据: " + BitConverter.ToString(trspData));
+                            logger("收到校验不通过数据: " + BitConverter.ToString(trspData));
                             return -1;
                         }
                     }
                     catch (SocketException se)
                     {
-                        Console.WriteLine("1000ms 超时未收到数据");
+                        logger("1000ms 超时未收到数据");
                         return -2;
                     }
                 }
                 catch (SocketException se)
                 {
-                    Console.WriteLine($"连接服务器时发生 Socket 异常: {se.Message}");
+                    logger($"连接服务器时发生 Socket 异常: {se.Message}");
                     return -4;
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"发生未知异常: {e.Message}");
+                    logger($"发生未知异常: {e.Message}");
                     return -5;
                 }
                 finally
@@ -103,7 +108,7 @@ namespace CorotlfocsLibrary
             }
         catch (Exception e)
         {
-            Console.WriteLine("错误: " + e.Message);
+            logger("错误: " + e.Message);
             return -1;
         }
         }
@@ -222,7 +227,7 @@ namespace CorotlfocsLibrary
                 | ((trspData[5] & 0xFF) << 16) 
                 | ((trspData[6] & 0xFF) << 8) 
                 | (trspData[7] & 0xFF);
-            Console.WriteLine("读取到数据: " + ans.ToString());
+            logger("读取到数据: " + ans.ToString());
             if(type==4)
             {
                 if(order==2 || order==3)
