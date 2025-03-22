@@ -39,14 +39,14 @@ namespace testapp
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(188, 180);
             this.label1.TabIndex = 0;
-            this.label1.Text = "// type 输入1\r\n//  1 上圆盘信息读取\r\n//  2 下圆盘信息\r\n//  3 光圈信息读取\r\n//  4 聚焦信息读取\r\n//  order: 输入2  \r\n/" +
-    "/ 02  实时位置\r\n// 03  目标位置\r\n// 04 复位完成标志 \r\n// 05 运行电流";
+            this.label1.Text = "// type 输入1\r\n//  1 上圆盘信息读取\r\n//  2 下圆盘信息\r\n//  3 光圈信息读取\r\n//  4 聚焦信息读取\r\n//  order: 输" +
+    "入2  \r\n// 02  实时位置\r\n// 03  目标位置\r\n// 04 复位完成标志 \r\n// 05 运行电流";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1299, 689);
+            this.ClientSize = new System.Drawing.Size(1327, 840);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";

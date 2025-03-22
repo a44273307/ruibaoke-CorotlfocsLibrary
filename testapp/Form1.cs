@@ -12,19 +12,35 @@ namespace testapp
 {
     public partial class Form1 : Form
     {
+         private TextBox textBox;
         public Form1()
         {
             InitializeComponent();
+
+             // 指定 TextBox 的位置和大小
+            int x = 50;
+            int y = 650;
+            int width = 800;
+            int height = 150;
+
+            // 创建 TextBox 控件
+            textBox = new TextBox();
+            textBox.Multiline = true;
+            textBox.Location = new System.Drawing.Point(x, y);
+            textBox.Size = new System.Drawing.Size(width, height);
+            this.Controls.Add(textBox);
+
+            
         }
-        
+       
     private TextBox input1;
     private TextBox input2;
     private TextBox input3;
-    private TextBox input4;
+  
     private TextBox output1;
     private TextBox output2;
     private TextBox output3;
-    private Button calculateButton;
+    
 
     private void Input_KeyPress(object sender, KeyPressEventArgs e)
     {
@@ -33,7 +49,17 @@ namespace testapp
             e.Handled = true;
         }
     }
-
+    private void showlog(string s)
+    {
+        string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        if (textBox != null)
+            {
+                textBox.AppendText(timestamp+s + Environment.NewLine);
+            }
+        // this.textBox1.AppendText("hhh");
+         //this.textBox1.Text ="hhh";
+     
+    }
     private void CreateControlButtons()
     {
         // 按钮配置列表（按钮名称，显示文本）
@@ -72,6 +98,7 @@ namespace testapp
    
         private void Form1_Load(object sender, EventArgs e)
         {
+           TcpReadinfo.logger= showlog;
            InitializeComponent();
            CreateControlButtons();
 
@@ -193,6 +220,6 @@ namespace testapp
 
     }
 
-
+   
     }
 }
