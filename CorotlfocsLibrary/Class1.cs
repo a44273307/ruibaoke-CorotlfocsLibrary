@@ -13,6 +13,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.IO;
 
 namespace CorotlfocsLibrary
 {
@@ -40,8 +41,15 @@ namespace CorotlfocsLibrary
         serverIp=setserverIp;
         port=setport;
     }
+    static bool isinit=false;
     static int SendAndReceiveData(byte[] sendData, out byte[] trspData)
     {
+        if(isinit==false)
+        {
+            readini();
+            isinit=true;
+        }
+        
         trspData = new byte[sendData.Length];
         
         try
@@ -136,8 +144,47 @@ namespace CorotlfocsLibrary
         // static int kfocus=150*10000/74.2;
         //     static int kguang=150*10000/180;
         static int kfocus= (int)(150*10000/74.2);
-        static int kguang=1;
-            
+        static int kguang=(int)(160*10000/180);
+        static int maxguangzhi=160*10000;
+
+        static int maxguangSet=160*10000;
+        static int maxfocsSet=250*10000;
+        static int IsUsemm=1;
+        // 1600000
+        private static void readini()
+        {
+                string filePath = @"D:\camerautofocs.ini";
+                if (File.Exists(filePath))
+                {
+                    string[] lines = File.ReadAllLines(filePath);
+                    foreach (string line in lines)
+                    {
+                        if (line.StartsWith("maxfocsSet"))
+                        {
+                            string value = line.Split('=')[1].Trim();
+                            if (int.TryParse(value, out int result))
+                            {
+                                maxfocsSet = result;
+                                logger($"readinit:maxfocsSet {maxfocsSet}");
+                            }
+                        }
+                        else if (line.StartsWith("maxguangSet"))
+                        {
+                            string value = line.Split('=')[1].Trim();
+                            if (int.TryParse(value, out int result))
+                            {
+                                maxguangSet = result;
+                                logger($"readinit: maxguangSet{maxguangSet}");
+                            }
+                        }
+                }
+                
+                }
+            else
+            {
+                logger($"readinit: nofile");
+            }
+        }
         public static int  controlfocusRotation(int diskNumber)
         {
             //  if(diskNumber>170)
@@ -148,11 +195,14 @@ namespace CorotlfocsLibrary
             //  {
             //     diskNumber=0;
             //  }
-             
+             if(IsUsemm==1)
              diskNumber=diskNumber*kfocus;
                byte[] sendData = { 0x01, 0x01, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x04 };
            
-            
+            if(diskNumber>maxfocsSet)
+            {
+                diskNumber=maxfocsSet;
+            }
            // 将 diskNumber 作为 32 位整数存入 sendData，并按照大端序存储
             sendData[4] = (byte)((diskNumber >> 24) & 0xFF);
             sendData[5] = (byte)((diskNumber >> 16) & 0xFF);
@@ -178,8 +228,17 @@ namespace CorotlfocsLibrary
             //  {
             //     diskNumber=0;
             //  }
-            
-             diskNumber=diskNumber* kguang;
+            if(IsUsemm==1)
+            {
+                diskNumber=diskNumber* kguang;
+                diskNumber=maxguangzhi-diskNumber;
+            }
+             if(diskNumber<0)
+             diskNumber=0;
+              if(diskNumber>maxguangSet)
+            {
+                diskNumber=maxguangSet;
+            }
              byte[] sendData = { 0x01, 0x01, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x04 };
              
             
@@ -228,10 +287,11 @@ namespace CorotlfocsLibrary
                 | ((trspData[6] & 0xFF) << 8) 
                 | (trspData[7] & 0xFF);
             logger("读取到数据: " + ans.ToString());
-            if(type==4)
+            if(type==4) //聚焦信息读取
             {
                 if(order==2 || order==3)
                 {
+                    if(IsUsemm==1)
                    ans= (int)((ans+0.5*kfocus)/kfocus);
                     
                 }
@@ -240,9 +300,11 @@ namespace CorotlfocsLibrary
             {
                 if(order==2 || order==3)
                 {
-            
-                     
-                    ans = (int)((ans + 0.5 * kguang) / kguang);
+                    if(IsUsemm==1)
+                    {
+                        ans=maxguangzhi-ans;
+                        ans = (int)((ans + 0.5 * kguang) / kguang);
+                    }
                 }
             }
             return 0;

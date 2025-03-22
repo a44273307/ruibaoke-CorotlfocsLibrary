@@ -102,7 +102,7 @@ namespace testapp
            InitializeComponent();
            CreateControlButtons();
 
-           this.Text = "输入计算器";
+           this.Text = "测试控制";
      
 
         Label label1 = new Label() { Text = "控制的输入:", Left = 500, Top = 10 };
