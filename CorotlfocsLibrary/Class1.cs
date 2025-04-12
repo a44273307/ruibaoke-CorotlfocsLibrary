@@ -120,11 +120,26 @@ namespace CorotlfocsLibrary
             return -1;
         }
         }
+        
+         public static bool checkandset(ref int diskNumber)
+        {
+            // 这里可以实现具体的修改逻辑
+            diskNumber = diskNumber +1; // 示例修改，将 diskNumber 乘以 2
+            if(diskNumber<1 || diskNumber>5)
+            {
+                logger("setnumber should be in 0-4");
+                return false;
+            }
+            return true;
+        }
         // 控制旋转 上圆盘第x号孔
         public static int  controlTopDiskRotation(int diskNumber)
         {
-             byte[] sendData = { 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x04 };
-            
+            if(!checkandset(ref diskNumber))
+            {
+                return -10;
+            }
+            byte[] sendData = { 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x04 };
             sendData[2]=(byte)diskNumber;
             sendData[8] = (byte)sendData.Take(8).Sum(b => (int)b);
             byte[] trspData=sendData;
@@ -133,8 +148,11 @@ namespace CorotlfocsLibrary
         // 控制旋转 下圆盘第x号孔
         public static int  controlBottomDiskRotation(int diskNumber)
         {
+            if(!checkandset(ref diskNumber))
+            {
+                return -10;
+            }
              byte[] sendData = { 0x01, 0x01, 0x01, 0x02, 0x00, 0x00, 0x00, 0x00, 0x04 };
-            
             sendData[2]=(byte)diskNumber;
             sendData[8] = (byte)sendData.Take(8).Sum(b => (int)b);
             byte[] trspData=sendData;
@@ -276,6 +294,14 @@ namespace CorotlfocsLibrary
 
         public static int  readinform(int type,int order,out int ans)
         {
+            if(type ==1 || type ==2)
+            {
+                if(!checkandset(ref order))
+                {
+                    ans = 0;
+                    return -10;
+                }
+            }
             byte[] sendData = { 0x01, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x04 };
             sendData[1]=(byte)order;
             sendData[3]=(byte)type;
