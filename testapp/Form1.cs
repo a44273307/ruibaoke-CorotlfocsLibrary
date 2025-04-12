@@ -148,27 +148,28 @@ namespace testapp
                 outputList.Add(output1);
 
         }
+        
+            
    
 
 
 
-
-
-      Label label2 = new Label() { Text = "readifno的输入1", Left = 500, Top = 220 };
-        input2 = new TextBox() { Left = 600, Top = 220, Width = 100 };
+      int leftindex=400;
+      Label label2 = new Label() { Text = "readifno的输入1", Left = leftindex, Top = 220 };
+        input2 = new TextBox() { Left = leftindex+100, Top = 220, Width = 100 };
         this.Controls.Add(input2);
         
-        this.Controls.Add( new Label() { Text = "readifno的输入2", Left = 500, Top = 220+30 });
-        input3 = new TextBox() { Left = 600, Top = 220+30, Width = 100 };
+        this.Controls.Add( new Label() { Text = "readifno的输入2", Left = leftindex, Top = 220+30 });
+        input3 = new TextBox() { Left = leftindex+100, Top = 220+30, Width = 100 };
         this.Controls.Add(input3);
         
         
-        this.Controls.Add( new Label() { Text = "输出1:", Left = 500, Top = 220+30+30 });
-        output2 = new TextBox() { Left = 600, Top = 220+30+30, Width = 100 };
+        this.Controls.Add( new Label() { Text = "输出1:", Left = leftindex, Top = 220+30+30 });
+        output2 = new TextBox() { Left = leftindex+100, Top = 220+30+30, Width = 100 };
      
 
-        this.Controls.Add( new Label() { Text = "输出2:", Left = 500, Top = 220+30+30+30 });
-        output3 = new TextBox() { Left = 600, Top = 220+30+30+30, Width = 100 };
+        this.Controls.Add( new Label() { Text = "输出2:", Left = leftindex, Top = 220+30+30+30 });
+        output3 = new TextBox() { Left = leftindex+100, Top = 220+30+30+30, Width = 100 };
            this.Controls.Add(output3);
         // Label label3 = new Label() { Text = "输入3:", Left = 500, Top = 70 };
         // input3 = new TextBox() { Left = 600, Top = 40, Width = 100 };
@@ -315,6 +316,9 @@ namespace testapp
 
     }
 
-   
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
