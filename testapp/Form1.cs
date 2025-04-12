@@ -82,7 +82,7 @@ namespace testapp
     // 创建按钮并设置属性
     int verticalPosition = 10;
     // 遍历除最后一个元素外的所有元素
-    for (int i = 0; i < buttonConfigs.Count - 2; i++)
+    for (int i = 0; i < buttonConfigs.Count - 3; i++)
     {
         var config = buttonConfigs[i];
         var btn = new Button
@@ -98,48 +98,24 @@ namespace testapp
         Controls.Add(btn);
         verticalPosition += 50;
     }
+    verticalPosition=400;
+    for (int i = buttonConfigs.Count - 3; i < buttonConfigs.Count ; i++)
     {
-        // 手动创建并设置最后一个按钮的位置
-        var lastConfig = buttonConfigs[buttonConfigs.Count - 3];
-        var lastBtn = new Button
+        var config = buttonConfigs[i];
+        var btn = new Button
         {
-            Name = lastConfig.Item1,
-            Text = lastConfig.Item2,
-            Location = new Point(600, 400), // 手动设置位置
+            Name = config.Item1,
+            Text = config.Item2,
+            Location = new Point(600, verticalPosition),
             Size = new Size(280, 40),
             Font = new Font("Microsoft YaHei", 10F)
         };
-        lastBtn.Click += Button_ClickHandler;
-        Controls.Add(lastBtn);
+        btn.Click += Button_ClickHandler;
+        
+        Controls.Add(btn);
+        verticalPosition += 50;
     }
-    {
-        // 手动创建并设置最后一个按钮的位置
-        var lastConfig = buttonConfigs[buttonConfigs.Count - 2];
-        var lastBtn = new Button
-        {
-            Name = lastConfig.Item1,
-            Text = lastConfig.Item2,
-            Location = new Point(600, 500), // 手动设置位置
-            Size = new Size(280, 40),
-            Font = new Font("Microsoft YaHei", 10F)
-        };
-        lastBtn.Click += Button_ClickHandler;
-        Controls.Add(lastBtn);
-    }
-     {
-        // 手动创建并设置最后一个按钮的位置
-        var lastConfig = buttonConfigs[buttonConfigs.Count - 1];
-        var lastBtn = new Button
-        {
-            Name = lastConfig.Item1,
-            Text = lastConfig.Item2,
-            Location = new Point(600, 450), // 手动设置位置
-            Size = new Size(280, 40),
-            Font = new Font("Microsoft YaHei", 10F)
-        };
-        lastBtn.Click += Button_ClickHandler;
-        Controls.Add(lastBtn);
-    }
+    
 
         
     }
