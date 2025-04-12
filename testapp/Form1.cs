@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CorotlfocsLibrary;
+using System.Diagnostics;
 namespace testapp
 {
     public partial class Form1 : Form
@@ -70,6 +71,7 @@ namespace testapp
     new Tuple<string, string>("controlfocusRotation", "控制聚焦位置"),
     new Tuple<string, string>("controlapertureRotation", "控制光圈位置"),
     new Tuple<string, string>("readInfo", "读取状态信息"),
+    new Tuple<string, string>("ipset", "修改ip地址"),
     new Tuple<string, string>("setkey", "设置控制读取的为编码器值"),
     new Tuple<string, string>("setzero", "归零"),
     // new Tuple<string, string>("readBottomDiskInfo", "读取下圆盘状态信息（参数同上圆盘）"),
@@ -95,6 +97,20 @@ namespace testapp
         
         Controls.Add(btn);
         verticalPosition += 50;
+    }
+    {
+        // 手动创建并设置最后一个按钮的位置
+        var lastConfig = buttonConfigs[buttonConfigs.Count - 3];
+        var lastBtn = new Button
+        {
+            Name = lastConfig.Item1,
+            Text = lastConfig.Item2,
+            Location = new Point(600, 400), // 手动设置位置
+            Size = new Size(280, 40),
+            Font = new Font("Microsoft YaHei", 10F)
+        };
+        lastBtn.Click += Button_ClickHandler;
+        Controls.Add(lastBtn);
     }
     {
         // 手动创建并设置最后一个按钮的位置
@@ -222,6 +238,19 @@ namespace testapp
             output2.Text= out2.ToString();
             output3.Text = out3.ToString();
                 return; 
+        }
+        if(button?.Name=="ipset")
+        {
+            try
+            {
+                string url = "http://"+TcpReadinfo.serverIp+":80";
+                Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"打开网址时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+              return; 
         }
         if(button?.Name=="setkey")
         {

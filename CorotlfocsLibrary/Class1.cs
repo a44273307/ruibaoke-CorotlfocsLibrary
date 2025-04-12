@@ -29,7 +29,7 @@ namespace CorotlfocsLibrary
 
     public class TcpReadinfo
     {
-    private static string serverIp = "192.168.3.7"; // 服务器 IP 地址
+    public static string serverIp = "192.168.3.7"; // 服务器 IP 地址
     private static int port = 8887; // 服务器端口
     // 定义一个委托类型，用于表示日志记录方法
     public delegate void LoggerDelegate(string message);
