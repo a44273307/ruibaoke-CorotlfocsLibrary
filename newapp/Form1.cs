@@ -112,8 +112,8 @@ private  int rotatset;
         {
             int  num1;
             int  ans;
-            ans=TcpReadinfo.readinform(4,2,out num1);
-            inputList[10].Text=num1.ToString();
+            ans=TcpReadinfo.readinform(3,2,out num1);
+            inputList[11].Text=num1.ToString();
             if(rotattozero==false)
             {
                 // 正到位
@@ -131,7 +131,7 @@ private  int rotatset;
                 }
                 else
                 {
-                    TcpReadinfo.controlfocusRotation(rotatset);
+                    TcpReadinfo.controlapertureRotation(rotatset);
                 }
             }
             if (rotattozero==true)
@@ -144,7 +144,7 @@ private  int rotatset;
                 }
                 else
                 {
-                    TcpReadinfo.controlfocusRotation(0);
+                    TcpReadinfo.controlapertureRotation(0);
                 }
             }
         }
@@ -278,22 +278,15 @@ private  int rotatset;
         int num=0;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // int  num1;
-            // int  ans;
-            // ans=TcpReadinfo.readinform(2,2,out num1);
-            // inputList[6].Text=num1.ToString();
+            int  num1;
+            int  ans;
+            ans=TcpReadinfo.readinform(2,2,out num1);
+            inputList[6].Text=num1.ToString();
 
-            // ans=TcpReadinfo.readinform(1,2,out num1);
-            // inputList[8].Text=num1.ToString();
+            ans=TcpReadinfo.readinform(1,2,out num1);
+            inputList[8].Text=num1.ToString();
 
-            // ans=TcpReadinfo.readinform(3,2,out num1);
-            // inputList[11].Text=num1.ToString();
-
-            // ans=TcpReadinfo.readinform(4,2,out num1);
-            // inputList[10].Text=num1.ToString();
             
-            // num++;
-            // inputList[6].Text=num.ToString();
             
         }
 
