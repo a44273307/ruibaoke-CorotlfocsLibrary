@@ -45,6 +45,9 @@ namespace newapp
             }
             buttonList[4].Text="ip设置";
             buttonList[5].Text="归零";
+
+
+            
         }
         private void allkeydeal(int num)
         {
@@ -61,7 +64,7 @@ namespace newapp
             MessageBox.Show("请输入有效的数字！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return ;
              }
-           var ans= TcpReadinfo.controlTopDiskRotation(num1);
+           var ans= TcpReadinfo.controlBottomDiskRotation(num1);
            if (ans!=0)
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
@@ -79,7 +82,7 @@ namespace newapp
             MessageBox.Show("请输入有效的数字！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return ;
              }
-           var ans= TcpReadinfo.controlBottomDiskRotation(num1);
+           var ans= TcpReadinfo.controlTopDiskRotation(num1);
            if (ans!=0)
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
@@ -163,17 +166,17 @@ namespace newapp
         {
             int  num1;
             int  ans;
-            ans=TcpReadinfo.readinform(1,2,out num1);
+            ans=TcpReadinfo.readinform(2,2,out num1);
             inputList[6].Text=num1.ToString();
 
-            ans=TcpReadinfo.readinform(2,2,out num1);
+            ans=TcpReadinfo.readinform(1,2,out num1);
             inputList[8].Text=num1.ToString();
 
             ans=TcpReadinfo.readinform(3,2,out num1);
-            inputList[10].Text=num1.ToString();
+            inputList[11].Text=num1.ToString();
 
             ans=TcpReadinfo.readinform(4,2,out num1);
-            inputList[11].Text=num1.ToString();
+            inputList[10].Text=num1.ToString();
             
             // num++;
             // inputList[6].Text=num.ToString();

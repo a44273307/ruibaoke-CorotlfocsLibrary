@@ -167,7 +167,7 @@ namespace CorotlfocsLibrary
 
         static int maxguangSet=160*10000;
         static int maxfocsSet=350*10000;
-        public static int IsUsemm=1;
+        public static int IsUsemm=0;
         // 1600000
         private static void readini()
         {
