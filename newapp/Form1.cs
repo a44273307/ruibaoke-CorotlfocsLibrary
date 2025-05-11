@@ -272,12 +272,12 @@ private  int rotatset;
         {
             int i = 10;
             allkeydeal(i);
-            var ans= TcpReadinfo.controlTopDiskRotation(1);
+            var ans= TcpReadinfo.controlBottomDiskRotation(1);
            if (ans!=0)
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
            }
-           ans= TcpReadinfo.controlBottomDiskRotation(3);
+           ans= TcpReadinfo.controlTopDiskRotation(3);
            if (ans!=0)
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
@@ -288,7 +288,7 @@ private  int rotatset;
             timer2.Enabled=true;
             timer2count=0;
         }
-        int num=0;
+        
         private  int numtoindex(int input)
         {
             input=-input;
@@ -307,15 +307,20 @@ private  int rotatset;
             inputList[9].Text=num1.ToString();
             inputList[8].Text=numtoindex(num1).ToString();
         }
+        private   int gfocs=0;
+        private   int groat=0;
         private  void showmessage2()
         {
             int  num1;
             int  ans;
             ans=TcpReadinfo.readinform(4,2,out num1);
             inputList[10].Text=num1.ToString();
+            gfocs=num1;
+
 
             ans=TcpReadinfo.readinform(3,2,out num1);
             inputList[11].Text=num1.ToString();
+            groat=num1;
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -324,7 +329,8 @@ private  int rotatset;
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if(timer2count++<50)
+            if(gfocs > 0 && groat > 0)
+            // if(timer2count++<50)
             {
                 showmessage();
                 showmessage2();
@@ -332,6 +338,7 @@ private  int rotatset;
             else
             {
                 timer2.Enabled=false;
+                this.button6.BackColor = System.Drawing.Color.Green;
             }
         }
 

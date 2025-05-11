@@ -112,7 +112,7 @@ namespace newapp
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.Green;
+            
             this.button3.Location = new System.Drawing.Point(1036, 316);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(163, 72);
@@ -123,7 +123,7 @@ namespace newapp
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Green;
+
             this.button1.Location = new System.Drawing.Point(917, 111);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(163, 72);
@@ -134,7 +134,7 @@ namespace newapp
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.Green;
+            
             this.button2.Location = new System.Drawing.Point(917, 203);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(163, 72);
@@ -145,7 +145,7 @@ namespace newapp
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.Color.Green;
+            
             this.button4.Location = new System.Drawing.Point(1036, 410);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(163, 72);
@@ -156,7 +156,7 @@ namespace newapp
             // 
             // button5
             // 
-            this.button5.BackColor = System.Drawing.Color.Green;
+            
             this.button5.Location = new System.Drawing.Point(1079, 657);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(163, 72);
@@ -167,7 +167,7 @@ namespace newapp
             // 
             // button6
             // 
-            this.button6.BackColor = System.Drawing.Color.Green;
+            // this.button6.BackColor = System.Drawing.Color.Green;
             this.button6.Location = new System.Drawing.Point(1079, 748);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(163, 72);
