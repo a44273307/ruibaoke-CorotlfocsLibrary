@@ -79,5 +79,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+    <ItemGroup>
+    <ProjectReference Include="..\CorotlfocsLibrary\CorotlfocsLibrary.csproj">
+      <Project>{c1fdc874-bb3b-40ec-a831-3de0209f59a5}</Project>
+      <Name>CorotlfocsLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

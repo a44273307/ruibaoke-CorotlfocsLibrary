@@ -29,6 +29,7 @@ namespace newapp
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -49,6 +50,8 @@ namespace newapp
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.textBox12 = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -186,31 +189,40 @@ namespace newapp
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(737, 661);
+            this.textBox9.Location = new System.Drawing.Point(572, 661);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(73, 28);
             this.textBox9.TabIndex = 20;
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(572, 661);
+            this.textBox10.Location = new System.Drawing.Point(736, 663);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(73, 28);
             this.textBox10.TabIndex = 19;
             // 
             // textBox11
             // 
-            this.textBox11.Location = new System.Drawing.Point(587, 729);
+            this.textBox11.Location = new System.Drawing.Point(584, 695);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(73, 28);
             this.textBox11.TabIndex = 22;
             // 
             // textBox12
             // 
-            this.textBox12.Location = new System.Drawing.Point(587, 695);
+            this.textBox12.Location = new System.Drawing.Point(584, 730);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(73, 28);
             this.textBox12.TabIndex = 21;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Form1
             // 
@@ -265,6 +277,8 @@ namespace newapp
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

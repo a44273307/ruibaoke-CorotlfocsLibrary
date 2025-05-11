@@ -38,7 +38,7 @@ namespace testapp
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(949, 336);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(188, 108);
+            this.label1.Size = new System.Drawing.Size(188, 90);
             this.label1.TabIndex = 0;
             this.label1.Text = "// readifno的输入1\r\n//  1 上圆盘信息读取\r\n//  2 下圆盘信息\r\n//  3 光圈信息读取\r\n//  4 聚焦信息读取 ";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -56,7 +56,7 @@ namespace testapp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1327, 840);
+            this.ClientSize = new System.Drawing.Size(1327, 747);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";

@@ -14,6 +14,7 @@ namespace testapp
     public partial class Form1 : Form
     {
          private TextBox textBox;
+         
         public Form1()
         {
             InitializeComponent();
