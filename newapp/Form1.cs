@@ -329,13 +329,9 @@ private  int rotatset;
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if(gfocs > 0 && groat > 0)
-            // if(timer2count++<50)
-            {
-                showmessage();
-                showmessage2();
-            }
-            else
+            showmessage();
+            showmessage2();
+            if(gfocs ==0  && groat == 0)
             {
                 timer2.Enabled=false;
                 this.button6.BackColor = System.Drawing.Color.Green;
