@@ -165,14 +165,20 @@ namespace CorotlfocsLibrary
         static int kguang=(int)(160*10000/180);
         static int maxguangzhi=160*10000;
 
-        static int maxguangSet=160*10000;
-        static int maxfocsSet=350*10000;
+        public static int maxguangSet=160*10000;
+        public static int maxfocsSet=350*10000;
         public static int IsUsemm=0;
         // 1600000
         private static void readini()
         {
-                string filePath = @"D:\camerautofocs.ini";
-                if (File.Exists(filePath))
+                 // 获取当前程序集的位置
+                string assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                // 获取程序所在目录
+                string directory = System.IO.Path.GetDirectoryName(assemblyLocation);
+                // 构建配置文件路径
+                string filePath = System.IO.Path.Combine(directory, "camerautofocs.ini");
+            logger($"ini__filePath {filePath }");
+            if (File.Exists(filePath))
                 {
                     string[] lines = File.ReadAllLines(filePath);
                     foreach (string line in lines)

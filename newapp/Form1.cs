@@ -58,6 +58,13 @@ namespace newapp
             timerButton2 = new System.Windows.Forms.Timer();
             timerButton2.Interval = 300;
             timerButton2.Tick += TimerButton2_Tick;
+
+            inputList[3].Text="1";
+            inputList[5].Text="1";
+
+            
+            textBox13.Text="0~"+TcpReadinfo.maxfocsSet.ToString();
+            textBox14.Text="0~"+TcpReadinfo.maxguangSet.ToString();
             
         }
         private  int focsset;
@@ -259,7 +266,7 @@ private  int rotatset;
             }
               return; 
         }
-    
+        private int timer2count=0;
         private void button6_Click(object sender, EventArgs e)
         {
             int i = 10;
@@ -274,25 +281,57 @@ private  int rotatset;
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
            }
+           ans= TcpReadinfo.controlapertureRotation(0);
+           ans= TcpReadinfo.controlfocusRotation(0);
+
+            timer2.Enabled=true;
+            timer2count=0;
         }
         int num=0;
-        private void timer1_Tick(object sender, EventArgs e)
+        private  int numtoindex(int input)
+        {
+            input=-input;
+            return input/30720;
+        }
+        private  void showmessage()
         {
             int  num1;
             int  ans;
             ans=TcpReadinfo.readinform(2,2,out num1);
-            inputList[6].Text=num1.ToString();
+            inputList[7].Text=num1.ToString();
+            inputList[6].Text=numtoindex(num1).ToString();
+            // inputList[6].Text=
 
             ans=TcpReadinfo.readinform(1,2,out num1);
-            inputList[8].Text=num1.ToString();
+            inputList[9].Text=num1.ToString();
+            inputList[8].Text=numtoindex(num1).ToString();
+        }
+        private  void showmessage2()
+        {
+            int  num1;
+            int  ans;
+            ans=TcpReadinfo.readinform(4,2,out num1);
+            inputList[10].Text=num1.ToString();
 
-            
-            
+            ans=TcpReadinfo.readinform(3,2,out num1);
+            inputList[11].Text=num1.ToString();
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            showmessage();
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-
+            if(timer2count++<50)
+            {
+                showmessage();
+                showmessage2();
+            }
+            else
+            {
+                timer2.Enabled=false;
+            }
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)

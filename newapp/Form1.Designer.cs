@@ -52,6 +52,8 @@ namespace newapp
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -223,13 +225,30 @@ namespace newapp
             // 
             // timer2
             // 
+            this.timer2.Interval = 500;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(355, 348);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(147, 28);
+            this.textBox13.TabIndex = 23;
+            // 
+            // textBox14
+            // 
+            this.textBox14.Location = new System.Drawing.Point(355, 454);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(147, 28);
+            this.textBox14.TabIndex = 24;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1662, 935);
+            this.Controls.Add(this.textBox14);
+            this.Controls.Add(this.textBox13);
             this.Controls.Add(this.textBox11);
             this.Controls.Add(this.textBox12);
             this.Controls.Add(this.textBox9);
@@ -280,6 +299,8 @@ namespace newapp
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textBox14;
     }
 }
 
