@@ -169,7 +169,7 @@ namespace CorotlfocsLibrary
         public static int maxfocsSet=350*10000;
         public static int IsUsemm=0;
         // 1600000
-        private static void readini()
+        public static void readini()
         {
                  // 获取当前程序集的位置
                 string assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;

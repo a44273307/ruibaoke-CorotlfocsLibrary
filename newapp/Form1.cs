@@ -22,6 +22,7 @@ namespace newapp
         public Form1()
         {
             InitializeComponent();
+            TcpReadinfo.readini();
             buttonList.Add(button1);
             buttonList.Add(button2);
             buttonList.Add(button3);
