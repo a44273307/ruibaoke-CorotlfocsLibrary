@@ -104,9 +104,49 @@ namespace newapp
                 }
             }
         }
+private  int rotatset;
+        private  int rotatimesset;
+        private  int rotatimesrun;
+        private  bool rotattozero=false;
         private void TimerButton2_Tick(object sender, EventArgs e)
         {
-            timerButton2.Stop();
+            int  num1;
+            int  ans;
+            ans=TcpReadinfo.readinform(4,2,out num1);
+            inputList[10].Text=num1.ToString();
+            if(rotattozero==false)
+            {
+                // 正到位
+                if (num1==rotatset)
+                {
+                    rotatimesrun++;
+                    if(rotatimesrun==rotatimesset)
+                    {
+                        timerButton2.Stop();
+                        button4.Enabled=true;
+                        return;
+                    }
+                    // 反向走
+                    rotattozero=true;
+                }
+                else
+                {
+                    TcpReadinfo.controlfocusRotation(rotatset);
+                }
+            }
+            if (rotattozero==true)
+            {
+                // 到0位值
+                if (num1==0)
+                {
+                    // 反向走
+                    rotattozero=false;
+                }
+                else
+                {
+                    TcpReadinfo.controlfocusRotation(0);
+                }
+            }
         }
         private void allkeydeal(int num)
         {
@@ -197,6 +237,13 @@ namespace newapp
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
            }
+           rotatset=num1;
+           rotatimesset=num2;
+           rotatimesrun=0;
+           rotattozero=false;
+
+           button4.Enabled=false;
+           timerButton2.Start();
         }
 
         private void button5_Click(object sender, EventArgs e)
