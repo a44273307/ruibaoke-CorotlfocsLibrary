@@ -13,6 +13,9 @@ namespace newapp
 {
     public partial class Form1 : Form
     {
+          // 定义两个Timer及独立的状态计数器
+        private System.Windows.Forms.Timer timerButton1;
+        private System.Windows.Forms.Timer timerButton2;
          private List<Button> buttonList = new List<Button>();
         private System.Collections.Generic.List<TextBox> inputList = new System.Collections.Generic.List<TextBox>();
 
@@ -46,8 +49,64 @@ namespace newapp
             buttonList[4].Text="ip设置";
             buttonList[5].Text="归零";
 
+                    // 初始化按钮1的Timer（间隔100ms）
+            timerButton1 = new System.Windows.Forms.Timer();
+            timerButton1.Interval = 600;
+            timerButton1.Tick += TimerButton1_Tick;
 
+            // 初始化按钮2的Timer（间隔200ms）
+            timerButton2 = new System.Windows.Forms.Timer();
+            timerButton2.Interval = 300;
+            timerButton2.Tick += TimerButton2_Tick;
             
+        }
+        private  int focsset;
+        private  int focsimesset;
+        private  int focsimesrun;
+        private  bool focstozero=false;
+        private void TimerButton1_Tick(object sender, EventArgs e)
+        {
+            int  num1;
+            int  ans;
+            ans=TcpReadinfo.readinform(4,2,out num1);
+            inputList[10].Text=num1.ToString();
+            if(focstozero==false)
+            {
+                // 正到位
+                if (num1==focsset)
+                {
+                    focsimesrun++;
+                    if(focsimesrun==focsimesset)
+                    {
+                        timerButton1.Stop();
+                        button3.Enabled=true;
+                        return;
+                    }
+                    // 反向走
+                    focstozero=true;
+                }
+                else
+                {
+                    TcpReadinfo.controlfocusRotation(focsset);
+                }
+            }
+            if (focstozero==true)
+            {
+                // 到0位值
+                if (num1==0)
+                {
+                    // 反向走
+                    focstozero=false;
+                }
+                else
+                {
+                    TcpReadinfo.controlfocusRotation(0);
+                }
+            }
+        }
+        private void TimerButton2_Tick(object sender, EventArgs e)
+        {
+            timerButton2.Stop();
         }
         private void allkeydeal(int num)
         {
@@ -109,6 +168,14 @@ namespace newapp
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
            }
+           focsset=num1;
+           focsimesset=num2;
+           focsimesrun=0;
+           focstozero=false;
+
+           button3.Enabled=false;
+           timerButton1.Start();
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -164,19 +231,19 @@ namespace newapp
         int num=0;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int  num1;
-            int  ans;
-            ans=TcpReadinfo.readinform(2,2,out num1);
-            inputList[6].Text=num1.ToString();
+            // int  num1;
+            // int  ans;
+            // ans=TcpReadinfo.readinform(2,2,out num1);
+            // inputList[6].Text=num1.ToString();
 
-            ans=TcpReadinfo.readinform(1,2,out num1);
-            inputList[8].Text=num1.ToString();
+            // ans=TcpReadinfo.readinform(1,2,out num1);
+            // inputList[8].Text=num1.ToString();
 
-            ans=TcpReadinfo.readinform(3,2,out num1);
-            inputList[11].Text=num1.ToString();
+            // ans=TcpReadinfo.readinform(3,2,out num1);
+            // inputList[11].Text=num1.ToString();
 
-            ans=TcpReadinfo.readinform(4,2,out num1);
-            inputList[10].Text=num1.ToString();
+            // ans=TcpReadinfo.readinform(4,2,out num1);
+            // inputList[10].Text=num1.ToString();
             
             // num++;
             // inputList[6].Text=num.ToString();
@@ -184,6 +251,11 @@ namespace newapp
         }
 
         private void timer2_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
         }
