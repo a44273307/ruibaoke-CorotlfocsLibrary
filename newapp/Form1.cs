@@ -71,7 +71,8 @@ namespace newapp
             textBox13.ReadOnly = true; // 让TextBox变为只读状态
             textBox14.ReadOnly = true; // 让TextBox变为只读状态
 
-            
+            showmessage();
+            showmessage2();
         }
         private  int focsset;
         private  int focsimesset;
@@ -163,7 +164,7 @@ private  int rotatset;
         }
         private void allkeydeal(int num)
         {
-            // timer1.Enabled=true;
+            timer1.Enabled=true;
         }
 
         private void button1_Click(object sender, EventArgs e)
