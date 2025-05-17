@@ -216,6 +216,11 @@ private  int rotatset;
             MessageBox.Show("请输入有效的数字！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return ;
              }
+             if(num1<0 || num1 > TcpReadinfo.maxfocsSet)
+             {
+                MessageBox.Show("请输入范围内的数字！");
+                return ;
+             }
              var ans=TcpReadinfo.controlfocusRotation(num1);
              if (ans!=0)
            {
@@ -273,6 +278,11 @@ private  int rotatset;
             {
             MessageBox.Show("请输入有效的数字！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return ;
+             }
+            if(num1<0 || num1 > TcpReadinfo.maxguangSet)
+             {
+                MessageBox.Show("请输入范围内的数字！");
+                return ;
              }
               var ans=TcpReadinfo.controlapertureRotation(num1);
              if (ans!=0)
