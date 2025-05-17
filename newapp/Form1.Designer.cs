@@ -54,6 +54,10 @@ namespace newapp
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.ch = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBox16 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,7 +96,7 @@ namespace newapp
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(754, 379);
+            this.textBox4.Location = new System.Drawing.Point(749, 378);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(90, 28);
             this.textBox4.TabIndex = 6;
@@ -133,7 +137,7 @@ namespace newapp
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(792, 236);
+            this.button2.Location = new System.Drawing.Point(792, 239);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(163, 72);
             this.button2.TabIndex = 13;
@@ -237,11 +241,46 @@ namespace newapp
             this.textBox14.Size = new System.Drawing.Size(147, 28);
             this.textBox14.TabIndex = 24;
             // 
+            // textBox15
+            // 
+            this.textBox15.Location = new System.Drawing.Point(1207, 526);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(90, 28);
+            this.textBox15.TabIndex = 25;
+            // 
+            // ch
+            // 
+            this.ch.Location = new System.Drawing.Point(1093, 377);
+            this.ch.Name = "ch";
+            this.ch.Size = new System.Drawing.Size(44, 43);
+            this.ch.TabIndex = 26;
+            this.ch.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Location = new System.Drawing.Point(1093, 496);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(44, 43);
+            this.checkBox1.TabIndex = 27;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // textBox16
+            // 
+            this.textBox16.Location = new System.Drawing.Point(1209, 412);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(90, 28);
+            this.textBox16.TabIndex = 28;
+            this.textBox16.TextChanged += new System.EventHandler(this.textBox16_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1662, 935);
+            this.Controls.Add(this.textBox16);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.ch);
+            this.Controls.Add(this.textBox15);
             this.Controls.Add(this.textBox14);
             this.Controls.Add(this.textBox13);
             this.Controls.Add(this.textBox11);
@@ -296,6 +335,10 @@ namespace newapp
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.TextBox textBox13;
         private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.CheckBox ch;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox textBox16;
     }
 }
 

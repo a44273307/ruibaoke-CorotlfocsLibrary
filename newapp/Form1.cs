@@ -250,6 +250,7 @@ private  int rotatset;
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
            }
+           
            rotatset=num1;
            rotatimesset=num2;
            rotatimesrun=0;
@@ -272,7 +273,6 @@ private  int rotatset;
             }
               return; 
         }
-        private int timer2count=0;
         private void button6_Click(object sender, EventArgs e)
         {
             int i = 10;
@@ -291,7 +291,6 @@ private  int rotatset;
            ans= TcpReadinfo.controlfocusRotation(0);
 
             timer2.Enabled=true;
-            timer2count=0;
         }
         
         private  int numtoindex(int input)
@@ -330,12 +329,11 @@ private  int rotatset;
         private void timer1_Tick(object sender, EventArgs e)
         {
             showmessage();
+            showmessage2();
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            showmessage();
-            showmessage2();
             if(gfocs ==0  && groat == 0)
             {
                 timer2.Enabled=false;
@@ -349,6 +347,11 @@ private  int rotatset;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox16_TextChanged(object sender, EventArgs e)
         {
 
         }
