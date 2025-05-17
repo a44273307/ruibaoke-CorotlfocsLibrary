@@ -226,9 +226,10 @@ private  int rotatset;
             {
                 beixiselect=true;
             }
-            if(beixiselect==true)
+            int beixi = 0;
+            if (beixiselect==true)
             {
-                if (! int.TryParse(textBox16.Text, out int beixi))
+                if (! int.TryParse(textBox16.Text, out beixi))
                 {
                 MessageBox.Show("背隙请输入有效的数字！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return ;
@@ -239,6 +240,15 @@ private  int rotatset;
                     return ;
                 }
             }
+            showmessage2();
+            int run2=0;
+            if(gfocs>=num1 && beixiselect==true && num2==1)
+            {
+                num1 =num1 -beixi;
+                run2=0;
+            }
+            
+
 
 
              var ans=TcpReadinfo.controlfocusRotation(num1);
@@ -272,12 +282,12 @@ private  int rotatset;
                 
                     
 
-                TcpReadinfo.controlfocusRotation(0);
+                TcpReadinfo.controlfocusRotation(run2);
                 while(1>0)
                 {
                      // 异步等待 1 秒（不阻塞 UI 线程）
                     await Task.Delay(1000);
-                    if(gfocs== 0)
+                    if(gfocs== run2)
                     {
                         break;
                     }
@@ -305,9 +315,10 @@ private  int rotatset;
             {
                 beixiselect=true;
             }
+            int beixi=0;
             if(beixiselect==true)
             {
-                if (! int.TryParse(textBox15.Text, out int beixi))
+                if (! int.TryParse(textBox15.Text, out beixi))
                 {
                 MessageBox.Show("背隙请输入有效的数字！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return ;
@@ -333,6 +344,15 @@ private  int rotatset;
            }
            button4.Enabled=false;
            int runtimes=0;
+            showmessage2();
+            int run2=0;
+            if(gfocs>=num1 && beixiselect==true && num2==1)
+            {
+                num1 =num1 -beixi;
+                run2=0;
+            }
+
+
            for(int time=0;time<10000;time++)
            {
                
@@ -356,12 +376,12 @@ private  int rotatset;
                 
                     
 
-                TcpReadinfo.controlapertureRotation(0);
+                TcpReadinfo.controlapertureRotation(run2);
                 while(1>0)
                 {
                      // 异步等待 1 秒（不阻塞 UI 线程）
                     await Task.Delay(1000);
-                    if(groat== 0)
+                    if(groat== run2)
                     {
                         break;
                     }
