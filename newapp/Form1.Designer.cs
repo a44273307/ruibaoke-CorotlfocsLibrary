@@ -247,6 +247,7 @@ namespace newapp
             this.textBox15.Name = "textBox15";
             this.textBox15.Size = new System.Drawing.Size(90, 28);
             this.textBox15.TabIndex = 25;
+            this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
             // 
             // ch
             // 

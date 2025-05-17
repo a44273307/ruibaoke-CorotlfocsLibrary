@@ -163,7 +163,7 @@ private  int rotatset;
         }
         private void allkeydeal(int num)
         {
-            timer1.Enabled=true;
+            // timer1.Enabled=true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -221,10 +221,31 @@ private  int rotatset;
                 MessageBox.Show("请输入范围内的数字！");
                 return ;
              }
+             bool beixiselect=false;
+            if(ch.Checked==true)
+            {
+                beixiselect=true;
+            }
+            if(beixiselect==true)
+            {
+                if (! int.TryParse(textBox16.Text, out int beixi))
+                {
+                MessageBox.Show("背隙请输入有效的数字！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return ;
+                }
+                if(beixi<0 || beixi > 15000)
+                {
+                    MessageBox.Show("背隙请输入范围内的数字！");
+                    return ;
+                }
+            }
+
+
              var ans=TcpReadinfo.controlfocusRotation(num1);
              if (ans!=0)
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
+             return ;
            }
            button3.Enabled=false;
            int runtimes=0;
@@ -279,6 +300,26 @@ private  int rotatset;
             MessageBox.Show("请输入有效的数字！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return ;
              }
+            bool beixiselect=false;
+            if(checkBox1.Checked==true)
+            {
+                beixiselect=true;
+            }
+            if(beixiselect==true)
+            {
+                if (! int.TryParse(textBox15.Text, out int beixi))
+                {
+                MessageBox.Show("背隙请输入有效的数字！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return ;
+                }
+                if(beixi<0 || beixi > 15000)
+                {
+                    MessageBox.Show("背隙请输入范围内的数字！");
+                    return ;
+                }
+            }
+             
+
             if(num1<0 || num1 > TcpReadinfo.maxguangSet)
              {
                 MessageBox.Show("请输入范围内的数字！");
@@ -288,6 +329,7 @@ private  int rotatset;
              if (ans!=0)
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
+             return ;
            }
            button4.Enabled=false;
            int runtimes=0;
@@ -421,6 +463,11 @@ private  int rotatset;
         }
 
         private void textBox16_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox15_TextChanged(object sender, EventArgs e)
         {
 
         }
