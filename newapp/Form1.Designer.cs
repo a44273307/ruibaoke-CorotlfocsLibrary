@@ -58,6 +58,7 @@ namespace newapp
             this.ch = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
+            this.textBox17 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -273,11 +274,19 @@ namespace newapp
             this.textBox16.TabIndex = 28;
             this.textBox16.TextChanged += new System.EventHandler(this.textBox16_TextChanged);
             // 
+            // textBox17
+            // 
+            this.textBox17.Location = new System.Drawing.Point(264, 879);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.Size = new System.Drawing.Size(309, 28);
+            this.textBox17.TabIndex = 29;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1662, 935);
+            this.Controls.Add(this.textBox17);
             this.Controls.Add(this.textBox16);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.ch);
@@ -340,6 +349,7 @@ namespace newapp
         private System.Windows.Forms.CheckBox ch;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.TextBox textBox17;
     }
 }
 

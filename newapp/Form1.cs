@@ -22,6 +22,8 @@ namespace newapp
         public Form1()
         {
             InitializeComponent();
+            this.Size = new Size(1000, 700);
+
             TcpReadinfo.readini();
             buttonList.Add(button1);
             buttonList.Add(button2);
@@ -73,6 +75,7 @@ namespace newapp
 
             showmessage();
             showmessage2();
+            showmessage3();
         }
         private  int focsset;
         private  int focsimesset;
@@ -169,7 +172,10 @@ private  int rotatset;
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            if(!isreset)
+            {
+                MessageBox.Show("未作归零处理");
+            }
             int i=0;
             allkeydeal(i);
            if (! int.TryParse(inputList[i].Text, out int num1))
@@ -188,6 +194,10 @@ private  int rotatset;
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if(!isreset)
+            {
+                MessageBox.Show("未作归零处理");
+            }
             int i=1;
             allkeydeal(i);
            if (! int.TryParse(inputList[i].Text, out int num1))
@@ -205,6 +215,10 @@ private  int rotatset;
 
         private async void  button3_Click(object sender, EventArgs e)
         {
+            if(!isreset)
+            {
+                MessageBox.Show("未作归零处理");
+            }
             int i=2;
             allkeydeal(i);
            if (! int.TryParse(inputList[i].Text, out int num1))
@@ -220,6 +234,11 @@ private  int rotatset;
              if(num1<0 || num1 > TcpReadinfo.maxfocsSet)
              {
                 MessageBox.Show("请输入范围内的数字！");
+                return ;
+             }
+             if(num2<=0)
+             {
+                MessageBox.Show("请输入合适的循环数字！");
                 return ;
              }
              bool beixiselect=false;
@@ -299,6 +318,10 @@ private  int rotatset;
 
         private async void button4_Click(object sender, EventArgs e)
         {
+            if(!isreset)
+            {
+                MessageBox.Show("未作归零处理");
+            }
              int i=4;
              allkeydeal(i);
            if (! int.TryParse(inputList[i].Text, out int num1))
@@ -310,6 +333,11 @@ private  int rotatset;
             {
             MessageBox.Show("请输入有效的数字！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return ;
+             }
+            if(num2<=0)
+             {
+                MessageBox.Show("请输入合适的循环数字！");
+                return ;
              }
             bool beixiselect=false;
             if(checkBox1.Checked==true)
@@ -347,7 +375,7 @@ private  int rotatset;
            int runtimes=0;
             showmessage2();
             int run2=0;
-            if(gfocs>=num1 && beixiselect==true && num2==1)
+            if(groat>=num1 && beixiselect==true && num2==1)
             {
                 num1 =num1 -beixi;
                 run2=0;
@@ -458,16 +486,32 @@ private  int rotatset;
             inputList[11].Text=num1.ToString();
             groat=num1;
         }
+        private  void showmessage3()
+        {
+            int  num1;
+            int  ans;
+            string endstr="";
+            for( int i=0;i<4;i++)
+            {
+                ans=TcpReadinfo.readinform(i,5,out num1);
+                endstr=endstr+num1.ToString()+"、";
+            }
+            string result = endstr.Substring(0, endstr.Length - 1);
+            textBox17.Text=result;
+            
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             showmessage();
             showmessage2();
+            //showmessage3();
         }
-
+        bool isreset=false;
         private void timer2_Tick(object sender, EventArgs e)
         {
             if(gfocs ==0  && groat == 0)
             {
+                isreset=true;
                 timer2.Enabled=false;
                 this.button6.BackColor = System.Drawing.Color.Green;
             }
