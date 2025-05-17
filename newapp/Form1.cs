@@ -66,6 +66,11 @@ namespace newapp
             
             textBox13.Text="0~"+TcpReadinfo.maxfocsSet.ToString();
             textBox14.Text="0~"+TcpReadinfo.maxguangSet.ToString();
+
+
+            textBox13.ReadOnly = true; // 让TextBox变为只读状态
+            textBox14.ReadOnly = true; // 让TextBox变为只读状态
+
             
         }
         private  int focsset;
