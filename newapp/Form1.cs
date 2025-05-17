@@ -279,14 +279,44 @@ private  int rotatset;
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
            }
-
-           rotatset=num1;
-           rotatimesset=num2;
-           rotatimesrun=0;
-           rotattozero=false;
-
            button4.Enabled=false;
-           timerButton2.Start();
+           int runtimes=0;
+           for(int time=0;time<10000;time++)
+           {
+               
+                TcpReadinfo.controlapertureRotation(num1);
+                while(1>0)
+                {
+                     // 异步等待 1 秒（不阻塞 UI 线程）
+                    await Task.Delay(1000);
+                    if(groat== num1)
+                    {
+                        break;
+                    }
+                }
+                runtimes++;
+                if(runtimes==num2)
+                {
+                   
+                    button4.Enabled=true;
+                     break;
+                }
+                
+                    
+
+                TcpReadinfo.controlapertureRotation(0);
+                while(1>0)
+                {
+                     // 异步等待 1 秒（不阻塞 UI 线程）
+                    await Task.Delay(1000);
+                    if(groat== 0)
+                    {
+                        break;
+                    }
+                    
+                }
+           }
+        
         }
 
         private void button5_Click(object sender, EventArgs e)
