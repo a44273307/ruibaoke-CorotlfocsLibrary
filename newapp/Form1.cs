@@ -202,7 +202,7 @@ private  int rotatset;
            return; 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void  button3_Click(object sender, EventArgs e)
         {
             int i=2;
             allkeydeal(i);
@@ -221,17 +221,46 @@ private  int rotatset;
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
            }
-           focsset=num1;
-           focsimesset=num2;
-           focsimesrun=0;
-           focstozero=false;
-
            button3.Enabled=false;
-           timerButton1.Start();
+           int runtimes=0;
+           for(int time=0;time<10000;time++)
+           {
+               
+                TcpReadinfo.controlfocusRotation(num1);
+                while(1>0)
+                {
+                     // 异步等待 1 秒（不阻塞 UI 线程）
+                    await Task.Delay(1000);
+                    if(gfocs== num1)
+                    {
+                        break;
+                    }
+                }
+                runtimes++;
+                if(runtimes==num2)
+                {
+                   
+                    button3.Enabled=true;
+                     break;
+                }
+                
+                    
 
+                TcpReadinfo.controlfocusRotation(0);
+                while(1>0)
+                {
+                     // 异步等待 1 秒（不阻塞 UI 线程）
+                    await Task.Delay(1000);
+                    if(gfocs== 0)
+                    {
+                        break;
+                    }
+                    
+                }
+           }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private async void button4_Click(object sender, EventArgs e)
         {
              int i=4;
              allkeydeal(i);
@@ -250,7 +279,7 @@ private  int rotatset;
            {
              MessageBox.Show("操作失败，结果"+ans.ToString());
            }
-           
+
            rotatset=num1;
            rotatimesset=num2;
            rotatimesrun=0;
