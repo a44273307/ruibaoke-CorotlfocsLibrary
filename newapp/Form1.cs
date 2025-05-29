@@ -437,17 +437,17 @@ private  int rotatset;
         {
             int i = 10;
             allkeydeal(i);
-            var ans= TcpReadinfo.controlBottomDiskRotation(1);
-           if (ans!=0)
-           {
-             MessageBox.Show("操作失败，结果"+ans.ToString());
-           }
-           ans= TcpReadinfo.controlTopDiskRotation(3);
-           if (ans!=0)
-           {
-             MessageBox.Show("操作失败，结果"+ans.ToString());
-           }
-           ans= TcpReadinfo.controlapertureRotation(0);
+        //     var ans= TcpReadinfo.controlBottomDiskRotation(1);
+        //    if (ans!=0)
+        //    {
+        //      MessageBox.Show("操作失败，结果"+ans.ToString());
+        //    }
+        //    ans= TcpReadinfo.controlTopDiskRotation(3);
+        //    if (ans!=0)
+        //    {
+        //      MessageBox.Show("操作失败，结果"+ans.ToString());
+        //    }
+          var ans= TcpReadinfo.controlapertureRotation(0);
            ans= TcpReadinfo.controlfocusRotation(0);
 
             timer2.Enabled=true;

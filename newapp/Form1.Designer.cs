@@ -59,6 +59,8 @@ namespace newapp
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.textBox17 = new System.Windows.Forms.TextBox();
+            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.textBox19 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -281,11 +283,31 @@ namespace newapp
             this.textBox17.Size = new System.Drawing.Size(309, 28);
             this.textBox17.TabIndex = 29;
             // 
+            // textBox18
+            // 
+            this.textBox18.Location = new System.Drawing.Point(43, 99);
+            this.textBox18.Multiline = true;
+            this.textBox18.Name = "textBox18";
+            this.textBox18.ReadOnly = true;
+            this.textBox18.Size = new System.Drawing.Size(1299, 224);
+            this.textBox18.TabIndex = 30;
+            // 
+            // textBox19
+            // 
+            this.textBox19.Location = new System.Drawing.Point(33, 720);
+            this.textBox19.Multiline = true;
+            this.textBox19.Name = "textBox19";
+            this.textBox19.ReadOnly = true;
+            this.textBox19.Size = new System.Drawing.Size(606, 74);
+            this.textBox19.TabIndex = 31;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1662, 935);
+            this.Controls.Add(this.textBox19);
+            this.Controls.Add(this.textBox18);
             this.Controls.Add(this.textBox17);
             this.Controls.Add(this.textBox16);
             this.Controls.Add(this.checkBox1);
@@ -350,6 +372,8 @@ namespace newapp
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TextBox textBox16;
         private System.Windows.Forms.TextBox textBox17;
+        private System.Windows.Forms.TextBox textBox18;
+        private System.Windows.Forms.TextBox textBox19;
     }
 }
 
